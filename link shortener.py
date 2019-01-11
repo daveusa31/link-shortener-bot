@@ -10,7 +10,7 @@ import json        #библа для расшифровки json ответов
 #      токены      #
 ####################
 
-tg_token = 'your token from @botfather'
+tg_token = 'your bot token from @botfather'
 
 
 ####################
@@ -21,6 +21,28 @@ tg_token = 'your token from @botfather'
 clck_url = 'https://clck.ru/--?url='
 
 tg_url = 'https://api.telegram.org/bot' + tg_token + '/'                                             #ссылка для запроса к телеграму
+
+
+
+
+###############
+#    списки   #
+###############
+
+result_list = [3]   #список
+chatid_list = []    #список чат айдишников
+
+
+####################
+# дефолтные ответы #
+####################
+
+
+start = 'Здесь будет привественное сообщение'  #это сообщение отправляется, при активации бота
+help  = 'Здесь будут все доступные команды'
+
+
+
 
 
 
@@ -99,10 +121,22 @@ def obrabotka():
 
 		r = requests.get(clck_url + degg)
 
-		print(r.url)
-
 
 		requests.get(send_message_url + 'Вот ваша ссылка\n' + r.text)
+
+
+	elif '/start' or '/help' in message_text:
+		
+		if '/start' in message_text:
+		
+			requests.get(send_message_url + start)
+			
+		elif '/help' in message_text:
+			
+			requests.get(send_message_url + help)
+			
+			
+		
 
 
 
