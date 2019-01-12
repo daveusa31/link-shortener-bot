@@ -4,6 +4,7 @@
 
 import requests    #библа для запросов в сеть
 import json        #библа для расшифровки json ответов
+from time import sleep
 
 
 ####################
@@ -20,8 +21,7 @@ tg_token = 'your bot token from @botfather'
 
 clck_url = 'https://clck.ru/--?url='
 
-tg_url = 'https://api.telegram.org/bot' + tg_token + '/'                                             #ссылка для запроса к телеграму
-
+tg_url = 'https://api.telegram.org/bot' + tg_token + '/'    
 
 
 
@@ -136,13 +136,18 @@ def obrabotka():
 			requests.get(send_message_url + help)
 			
 			
+	
+			
+			
 		
 
 
-
-
 while True: 
+	sleep(2)
 	obrabotka()
+	print(chatid_list)     # логается чат айдишники из списка
+	print('В боте', len(chatid_list), 'юзеров') #логается кол-во человек, открывших бот
+	print('было получено', result_list 'сообщений') #логается кол-во полученных сообщений
 
 
 
