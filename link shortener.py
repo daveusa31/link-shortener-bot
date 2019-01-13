@@ -107,19 +107,17 @@ def obrabotka():
 
 	send_message_url = tg_url + 'sendMessage?chat_id=' + str(chat_id) + '&text='
 
-	for i in message_text:
-
-		degg = i
+	message_text = message_text[0]
 
 	
 
 
-	if 'http' in degg:
+	if 'http' in message_text:
 		
 
 		requests.get(send_message_url + 'Сейчас ваша ссылку будет сокращена')
 
-		r = requests.get(clck_url + degg)
+		r = requests.get(clck_url + message_text)
 
 
 		requests.get(send_message_url + 'Вот ваша ссылка\n' + r.text)
@@ -139,9 +137,6 @@ def obrabotka():
 	
 			
 			
-		
-
-
 while True: 
 	sleep(2)
 	obrabotka()
