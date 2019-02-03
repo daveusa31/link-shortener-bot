@@ -53,26 +53,38 @@ help  = 'Здесь будут все доступные команды'
 
 
 def get_update():    #функция для получения последнего обновлениея   
-	
-	for item in result_list:
-		number = item
 
-	result_list.remove(number)
+	
+	for i in updateid_list:
+		number = i
+
+	updateid_list.remove(number)
 
 	number = number + 1
-	result_list.append(number)
 
+	updateid_list.append(number)
 
 
 	while True:
-		r = requests.get(tg_url + 'getupdates')                          
+
+		r = requests.get(tg_url + 'getupdates?offset=' + str(number))
+
 		data = r.json()  
 
+		
+
+			
+
 		try:
-			chat_id =      data['result'][number]['message']['chat']['id']          
-			message_text = data['result'][number]['message']['text'],
-			user_name = data['result'][number]['message']['from']['username'],
-			message_id = data['result'][number]['message']['message_id']
+			chat_id =      data['result'][0]['message']['chat']['id'],
+			       
+			message_text = data['result'][0]['message']['text'],
+
+			user_name = data['result'][0]['message']['from']['username'],
+
+			message_id = data['result'][0]['message']['message_id'],
+
+			update_id = data['result'][0]['update_id']
 
 			break
 
@@ -81,19 +93,16 @@ def get_update():    #функция для получения последне�
 			continue 
 
 
-
-	if not chat_id in chatid_list:
-		chatid_list.append(chat_id)
-
-
-
+		
 	data = {'chat_id'      : chat_id,
-			'message_text' : message_text,
-			'result'       : number
+			'message_text' : message_text
+			
 			}
 																	 
 																	 #cоздаётся словарь с полученными данными         
 	return data
+
+
 
 
 
